@@ -1,4 +1,4 @@
-import { Mesh, MeshToonMaterial, TorusBufferGeometry } from "three";
+import { MathUtils, Mesh, MeshToonMaterial, TorusBufferGeometry } from "three";
 
 function createTorus() {
   // create a geometry
@@ -11,6 +11,13 @@ function createTorus() {
 
   // create a Mesh containing the geometry and material
   const torus = new Mesh(geometry, material);
+
+  const radiansPerSeconds = MathUtils.degToRad(50);
+  torus.tick = (delta) => {
+    torus.rotation.z -= radiansPerSeconds * delta;
+    torus.rotation.x -= radiansPerSeconds * delta;
+    torus.rotation.y -= radiansPerSeconds * delta;
+  };
 
   return torus;
 }

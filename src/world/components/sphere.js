@@ -1,9 +1,4 @@
-import {
-  CircleBufferGeometry,
-  Mesh,
-  MeshPhongMaterial,
-  SphereBufferGeometry,
-} from "three";
+import { Mesh, MeshPhongMaterial, SphereBufferGeometry } from "three";
 
 function createSphere() {
   // create a geometry
@@ -21,6 +16,15 @@ function createSphere() {
 
   // create a Mesh containing the geometry and material
   const sphere = new Mesh(geometry, material);
+
+  var theta = 0;
+  sphere.tick = (delta) => {
+    theta += 0.009;
+    sphere.position.y += 2 * Math.sin(theta).toFixed(4) * delta;
+    sphere.position.x += 2 * Math.cos(theta).toFixed(4) * delta;
+    sphere.rotation.y += 0.3 * delta;
+    sphere.rotation.z += 0.3 * delta;
+  };
 
   return sphere;
 }

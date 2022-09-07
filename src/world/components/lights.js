@@ -10,6 +10,13 @@ function createLights() {
   // move the light right, up, and towards us
   light.position.set(10, 10, 10);
 
+  var theta = 0;
+  light.tick = (delta) => {
+    theta += 0.05;
+    light.position.z += 100 * Math.sin(theta).toFixed(4) * delta;
+    light.position.x += 100 * Math.cos(theta).toFixed(4) * delta;
+  };
+
   return light;
 }
 

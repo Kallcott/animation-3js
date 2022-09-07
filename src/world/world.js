@@ -28,12 +28,12 @@ class World {
     container.append(renderer.domElement);
 
     const cube = createCube();
-    cube.position.set(-1.2, 1.5, -4);
+    cube.position.set(0, 1.5, 0);
     cube.scale.set(1.2, 1.4, 0.8);
     cube.rotation.set(0, 20, 20);
     scene.add(cube);
 
-    const myPOSVector = new Vector3(1.4, 0.8, -0.5);
+    const myPOSVector = new Vector3(1.4, 1.4, -4);
     const myScaleVector = new Vector3(-1.1, -1.3, -0.4);
 
     const myEulerRotation = new Euler(
@@ -50,7 +50,7 @@ class World {
 
     const torus = createTorus();
     torus.matrix = new Matrix4();
-    torus.position.x = -1.6;
+    torus.position.x = 0;
     torus.position.y = -2;
     torus.position.z = -5;
 
@@ -62,7 +62,7 @@ class World {
     scene.add(torus);
 
     const sphere = createSphere();
-    sphere.position.set(+1.2, -1.4, -0.5);
+    sphere.position.set(0, -1.4, 0);
     sphere.rotateZ(MathUtils.degToRad(45));
     scene.add(sphere);
 
@@ -80,9 +80,18 @@ class World {
 
     const resizer = new Resizer(container, camera, renderer);
 
+    // We don't need a resize hook anymore, because the animation loop is already updating every frame.
     // resizer.onResize = () => {
     //   this.render();
     // };
+
+    // add objects to our animation loop.
+    loop.updatables.push(cube);
+    loop.updatables.push(sphere);
+    loop.updatables.push(triangle);
+    loop.updatables.push(torus);
+    loop.updatables.push(camera);
+    loop.updatables.push(light);
   }
 
   render() {
